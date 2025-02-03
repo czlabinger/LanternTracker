@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LumaflyLanternTracker", "LumaflyLanternTracker.csproj", "{ABC0B8C7-D170-4898-8436-CE5F23C06EBC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{59EDA838-5920-4A78-BE9A-F193F433E014}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\dependabot.yml = .github\dependabot.yml
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ABC0B8C7-D170-4898-8436-CE5F23C06EBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABC0B8C7-D170-4898-8436-CE5F23C06EBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABC0B8C7-D170-4898-8436-CE5F23C06EBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABC0B8C7-D170-4898-8436-CE5F23C06EBC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2EE89EBE-7484-4F47-B3C5-EE0D2AF3142D}
+	EndGlobalSection
+EndGlobal
