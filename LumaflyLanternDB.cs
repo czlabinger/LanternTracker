@@ -6,7 +6,7 @@ namespace LumaflyLanternTracker {
 
 
         //Serialized LanternKey, LanternState
-        internal static Dictionary<string[], LanternState> list = new Dictionary<string[], LanternState>
+        internal static Dictionary<string[], LanternState> list = new Dictionary<string[], LanternState>(new StringArrayComparer())
         {
             {new LanternKey("Ruins1_29", "ruind_dressing_light_03 (1)", new Vector2(13.04f, 10.87f)).Serialize(), LanternState.DEFAULT },
             {new LanternKey("Ruins1_29", "ruind_dressing_light_03 (2)", new Vector2(19.23f, 11.66f)).Serialize(), LanternState.DEFAULT },
