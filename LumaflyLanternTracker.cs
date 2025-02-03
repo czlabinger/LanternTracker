@@ -7,8 +7,11 @@ using UnityEngine.SceneManagement;
 namespace LumaflyLanternTracker {
     public class LumaflyLanternTrackerMod : Mod {
 
-        public override string GetVersion() => "0.1.8";
-        internal int broken = 0;
+        public override string GetVersion() => "0.2.0";
+        internal static readonly int total = LumaflyLanternDB.list.Count;
+        internal static int broken = 0;
+        internal static int totalInRoom = 0;
+        internal static int brokenInRoom = 0;
 
         #region Genral
 
