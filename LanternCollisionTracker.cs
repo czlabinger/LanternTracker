@@ -38,17 +38,16 @@ namespace LumaflyLanternTracker {
 
             if (gameObject.GetComponent<BoxCollider2D>() != null) {
 
-                foreach (string[] key in LumaflyLanternDB.list.Keys) {
-                    if (key.SequenceEqual(LanternKey.FromGameObject(gameObject).Serialize())) {
+                if (LumaflyLanternDB.list.ContainsKey(LanternKey.FromGameObject(gameObject).Serialize())) {
 
-                        if (LumaflyLanternDB.list[key] == LanternState.DEFAULT) {
-                            LumaflyLanternDB.list[key] = LanternState.BROKEN;
-                            LumaflyLanternTrackerMod.totalBroken += 1;
-                            LumaflyLanternTrackerMod.brokenInRoom += 1;
-                            LumaflyLanternTrackerMod.Instance.LogDebug($"Broken {gameObject.name} +1: {LumaflyLanternTrackerMod.totalBroken}");
-                            break;
-                        }
+                    if (LumaflyLanternDB.list[LanternKey.FromGameObject(gameObject).Serialize()] == LanternState.DEFAULT) {
+                        LumaflyLanternDB.list[LanternKey.FromGameObject(gameObject).Serialize()] = LanternState.BROKEN;
+                        LumaflyLanternTrackerMod.totalBroken += 1;
+                        LumaflyLanternTrackerMod.brokenInRoom += 1;
+                        LumaflyLanternTrackerMod.Instance.LogDebug($"Broken {gameObject.name} +1: {LumaflyLanternTrackerMod.totalBroken}");
+                        
                     }
+                    
                 }
                 
             }

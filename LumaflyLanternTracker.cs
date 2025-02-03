@@ -48,19 +48,17 @@ namespace LumaflyLanternTracker {
             brokenInRoom = 0;
 
             foreach (GameObject gameObject in newScene.GetRootGameObjects()) {
-                foreach (string[] key in LumaflyLanternDB.list.Keys) {
-                     
-                    if (key.SequenceEqual(LanternKey.FromGameObject(gameObject).Serialize())) {
-                        gameObject.AddComponent<LanternCollisionTracker>();
-                        totalInRoom++;
+
+                if (LumaflyLanternDB.list.ContainsKey(LanternKey.FromGameObject(gameObject).Serialize())) {
+                    gameObject.AddComponent<LanternCollisionTracker>();
+                    totalInRoom++;
                         
-                        if (LumaflyLanternDB.list[key] == LanternState.BROKEN) {
-                            brokenInRoom ++;
-                        }
-                        LogDebug($"in room: {totalInRoom}, broken in room: {brokenInRoom}, total broken: {totalBroken}");
-                        break;
+                    if (LumaflyLanternDB.list[LanternKey.FromGameObject(gameObject).Serialize()] == LanternState.BROKEN) {
+                        brokenInRoom ++;
                     }
+                    LogDebug($"in room: {totalInRoom}, broken in room: {brokenInRoom}, total broken: {totalBroken}");
                 }
+                
             }
         }
     }
