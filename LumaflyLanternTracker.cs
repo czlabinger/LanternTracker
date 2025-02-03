@@ -1,9 +1,6 @@
-using GlobalEnums;
 using Modding;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -49,7 +46,6 @@ namespace LumaflyLanternTracker {
                 foreach (string[] key in LumaflyLanternDB.list.Keys) {
                      
                     if (key.SequenceEqual(LanternKey.FromGameObject(gameObject).Serialize())) {
-                        Log($"Attaching tracker to: {gameObject.name}");
                         gameObject.AddComponent<LanternCollisionTracker>();
                         break;
                     }
