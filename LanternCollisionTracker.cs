@@ -1,31 +1,38 @@
-﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace LumaflyLanternTracker {
     internal class LanternCollisionTracker : MonoBehaviour {
 
-        //TODO: Check if collision is nail
+        
         private void OnTriggerEnter2D(Collider2D other) {
-            NailSlash nailSlash = HeroController.instance.GetComponent<NailSlash>();
+            
+            List<GameObject> list = new List<GameObject>() { 
+                GetChildRecursive(HeroController.instance.gameObject, "Slash"),
+                GetChildRecursive(HeroController.instance.gameObject, "AltSlash"),
+                GetChildRecursive(HeroController.instance.gameObject, "DownSlash"),
+                GetChildRecursive(HeroController.instance.gameObject, "UpSlash"),
+                GetChildRecursive(HeroController.instance.gameObject, "Cyclone Slash"),
+                GetChildRecursive(HeroController.instance.gameObject, "WallSlash"),
+                GetChildRecursive(HeroController.instance.gameObject, "Great Slash"),
+                GetChildRecursive(HeroController.instance.gameObject, "Dash Slash"),
+                GetChildRecursive(HeroController.instance.gameObject, "Sharp Shadow"),
+            };
 
-            if (nailSlash != null) {
-                if (nailSlash.gameObject != null) {
-                    if (nailSlash.isActiveAndEnabled) {
-                        if (other.gameObject.Equals(nailSlash.gameObject)) {
+
+            foreach (GameObject slashType in list) {
+                if (slashType != null) {
+                    
+                    if (slashType.activeSelf) {
+                        if (other.gameObject.Equals(slashType.gameObject)) {
                             TrackDestroy();
-                        }
-                        else {
-                            LumaflyLanternTrackerMod.Instance.Log($"Other != Slash: {other.name}");
+                            return;
                         }
                     }
                 }
-                else {
-                    LumaflyLanternTrackerMod.Instance.Log($"Slash is null or nailSlash.isActiveAndEnabled: {nailSlash.isActiveAndEnabled}");
-                }
             }
         }
-
 
         private void TrackDestroy() {
 
@@ -33,21 +40,30 @@ namespace LumaflyLanternTracker {
 
                 foreach (string[] key in LumaflyLanternDB.list.Keys) {
                     if (key.SequenceEqual(LanternKey.FromGameObject(gameObject).Serialize())) {
-                        LumaflyLanternTrackerMod.Instance.Log($"Sate of {gameObject.name}: {LumaflyLanternDB.list[key]}");
+
                         if (LumaflyLanternDB.list[key] == LanternState.DEFAULT) {
                             LumaflyLanternDB.list[key] = LanternState.BROKEN;
-                            LumaflyLanternTrackerMod.Instance.broken += 1;
-                            LumaflyLanternTrackerMod.Instance.Log($"Broken +1: {LumaflyLanternTrackerMod.Instance.broken}");
+                            LumaflyLanternTrackerMod.broken += 1;
+                            LumaflyLanternTrackerMod.Instance.LogDebug($"Broken {gameObject.name} +1: {LumaflyLanternTrackerMod.broken}");
+                            //TODO: Save in DB
                             break;
-                        }
-                        else {
-                            LumaflyLanternTrackerMod.Instance.Log($"State was not default but was: {LumaflyLanternDB.list[key]}");
-                            LumaflyLanternTrackerMod.Instance.Log($"Object: {gameObject.name}");
                         }
                     }
                 }
                 
             }
+        }
+
+        public GameObject GetChildRecursive(GameObject parent, string childName) {
+            foreach (Transform child in parent.transform) {
+                if (child.name == childName)
+                    return child.gameObject;
+
+                GameObject result = GetChildRecursive(child.gameObject, childName);
+                if (result != null)
+                    return result;
+            }
+            return null;
         }
     }
 }

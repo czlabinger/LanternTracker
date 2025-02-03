@@ -1,17 +1,17 @@
-using GlobalEnums;
 using Modding;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace LumaflyLanternTracker {
     public class LumaflyLanternTrackerMod : Mod {
 
-        public override string GetVersion() => "0.1.8";
-        internal int broken = 0;
+        public override string GetVersion() => "0.2.0";
+        internal static readonly int total = LumaflyLanternDB.list.Count;
+        internal static int broken = 0;
+        internal static int totalInRoom = 0;
+        internal static int brokenInRoom = 0;
 
         #region Genral
 
@@ -49,7 +49,6 @@ namespace LumaflyLanternTracker {
                 foreach (string[] key in LumaflyLanternDB.list.Keys) {
                      
                     if (key.SequenceEqual(LanternKey.FromGameObject(gameObject).Serialize())) {
-                        Log($"Attaching tracker to: {gameObject.name}");
                         gameObject.AddComponent<LanternCollisionTracker>();
                         break;
                     }

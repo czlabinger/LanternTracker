@@ -6,7 +6,7 @@ Currently has very many debug logs. Will remove as development continues
 
 ## TODO
 
-- [ ] Check when decoration is destroyed
+- [X] Check when decoration is destroyed
 - [ ] Build the LanternDB
 - [ ] Add UI for Total/Room amount
 - [ ] Track how many are in room (SceneLoaded [Unity's Version] check how many GOs are in DB)
