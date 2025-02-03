@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace LumaflyLanternTracker {
@@ -41,9 +40,11 @@ namespace LumaflyLanternTracker {
                 if (LumaflyLanternDB.list.ContainsKey(LanternKey.FromGameObject(gameObject).Serialize())) {
 
                     if (LumaflyLanternDB.list[LanternKey.FromGameObject(gameObject).Serialize()] == LanternState.DEFAULT) {
+
                         LumaflyLanternDB.list[LanternKey.FromGameObject(gameObject).Serialize()] = LanternState.BROKEN;
                         LumaflyLanternTrackerMod.totalBroken += 1;
                         LumaflyLanternTrackerMod.brokenInRoom += 1;
+                        LumaflyLanternTrackerMod.Instance.UpdateUI();
                         LumaflyLanternTrackerMod.Instance.LogDebug($"Broken {gameObject.name} +1: {LumaflyLanternTrackerMod.totalBroken}");
                         
                     }

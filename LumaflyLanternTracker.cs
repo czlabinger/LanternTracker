@@ -1,6 +1,5 @@
 using Modding;
 using System;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,6 +11,8 @@ namespace LumaflyLanternTracker {
         internal static int totalBroken = 0;
         internal static int totalInRoom = 0;
         internal static int brokenInRoom = 0;
+
+        private LumaflyLanternUI ui;
 
         #region Genral
 
@@ -38,6 +39,7 @@ namespace LumaflyLanternTracker {
             Log("Initializing LumaflyLanternTracker");
             base.Initialize();
 
+            ui = new LumaflyLanternUI();
             UnityEngine.SceneManagement.SceneManager.activeSceneChanged += AttachTracker;
 
             Log("Initialized LumaflyLanternTracker");
@@ -60,6 +62,12 @@ namespace LumaflyLanternTracker {
                 }
                 
             }
+            UpdateUI();
+        }
+
+        internal void UpdateUI() {
+            ui.TotalCounter.Text = $"{totalBroken}/{total}";
+            ui.RoomCounter.Text = $"{brokenInRoom}/{totalInRoom}";
         }
     }
 }
