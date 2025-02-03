@@ -9,8 +9,8 @@ Currently has very many debug logs. Will remove as development continues
 - [X] Check when decoration is destroyed
 - [ ] Build the LanternDB
 - [ ] Add UI for Total/Room amount
-- [ ] Track how many are in room (SceneLoaded [Unity's Version] check how many GOs are in DB)
-- [ ] Track how many in room were cut before
+- [X] Track how many are in room (SceneLoaded [Unity's Version] check how many GOs are in DB)
+- [X] Track how many in room were broken before
 - [ ] Check if Crystal Dash destroyes some lanterns
 - [ ] If Above is true track destruction from Crstal Dash
 
