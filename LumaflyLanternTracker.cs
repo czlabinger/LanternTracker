@@ -2,12 +2,15 @@ using GlobalEnums;
 using Modding;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.NetworkInformation;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace LumaflyLanternTracker {
     public class LumaflyLanternTrackerMod : Mod {
 
-        public override string GetVersion() => "0.1.7";
+        public override string GetVersion() => "0.1.8";
         internal int broken = 0;
 
         #region Genral
@@ -35,56 +38,23 @@ namespace LumaflyLanternTracker {
             Log("Initializing LumaflyLanternTracker");
             base.Initialize();
 
-            ModHooks.AttackHook += CheckDestroy;
-
-            /*            Log(string.Join(", ", new LanternKey("Ruins1_29", "ruind_dressing_light_03 (1)", new Vector2(13.04f, 10.87f)).Serialize()));
-                        Log(string.Join(", ", new LanternKey("Ruins1_29", "ruind_dressing_light_03 (2)", new Vector2(19.23f, 11.66f)).Serialize()));
-                        Log(string.Join(", ", new LanternKey("Ruins1_29", "ruind_dressing_light_03 (4)", new Vector2(6.29f, 11.34f)).Serialize()));
-                        Log(string.Join(", ", new LanternKey("Ruins1_29", "ruind_dressing_light_03 (5)", new Vector2(16.89f, 11.68f)).Serialize()));
-                        Log(string.Join(", ", new LanternKey("Ruins1_29", "ruind_dressing_light_03 (7)", new Vector2(9.66f, 11.26f)).Serialize()));*/
-
+            UnityEngine.SceneManagement.SceneManager.activeSceneChanged += AttachTracker;
 
             Log("Initialized LumaflyLanternTracker");
         }
 
-        private void CheckDestroy(AttackDirection dir) {
-            foreach (GameObject gameObject in UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects()) {
-                Log($"Checking GO with name: {gameObject.name}");
-                if (gameObject.GetComponent<BoxCollider2D>() != null) {
+        private void AttachTracker(Scene oldScene, Scene newScene) {
 
-                    GameObject slash = HeroController.instance.transform.Find("Attacks/Slash").gameObject;
-
-                    Log($"HasCollider: {gameObject.name}");
-
-                    if (slash != null) {
-
-                        Log($"GO: {gameObject.GetComponent<BoxCollider2D>().bounds} / slash: {slash.GetComponent<PolygonCollider2D>().bounds}");
-
-                        //TODO: Not working
-                        if (AreCollidersOverlapping(gameObject.GetComponent<BoxCollider2D>(), slash.GetComponent<PolygonCollider2D>())) {
-                            Log("a");
-                            if (LumaflyLanternDB.list[LanternKey.FromGameObject(gameObject).Serialize()] == LanternState.DEFAULT) {
-                                Log("b");
-                                LumaflyLanternDB.list[LanternKey.FromGameObject(gameObject).Serialize()] = LanternState.BROKEN;
-                                broken += 1;
-                                Log($"Broken +1: {broken}");
-                            }
-                        }
-                    }
-                    else {
-                        LogError("Slash is null");
+            foreach (GameObject gameObject in newScene.GetRootGameObjects()) {
+                foreach (string[] key in LumaflyLanternDB.list.Keys) {
+                     
+                    if (key.SequenceEqual(LanternKey.FromGameObject(gameObject).Serialize())) {
+                        Log($"Attaching tracker to: {gameObject.name}");
+                        gameObject.AddComponent<LanternCollisionTracker>();
+                        break;
                     }
                 }
             }
-        }
-
-        public static bool AreCollidersOverlapping(Collider2D collider1, Collider2D collider2) {
-            ContactFilter2D filter = new ContactFilter2D().NoFilter();
-            List<Collider2D> results = new List<Collider2D>();
-            if (Physics2D.OverlapCollider(collider1, filter, results) > 0) {
-                return results.Contains(collider2);
-            }
-            return false;
         }
     }
 }
