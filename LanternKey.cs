@@ -18,7 +18,7 @@ namespace LumaflyLanternTracker {
         }
 
         public static LanternKey FromGameObject(GameObject obj) {
-            return new LanternKey(obj.scene.name, obj.name, (Vector2)obj.transform.position);
+            return new LanternKey(obj.scene.name, obj.name, new Vector2(obj.transform.position.x, obj.transform.position.y));
         }
 
         private (string, string, Vector2) ToTuple() {
@@ -109,8 +109,7 @@ namespace LumaflyLanternTracker {
 
         public static LanternKey FromSerializedString(string serialized) {
             return Deserialize(serialized.Split(';'));
+
         }
-
     }
-
 }
