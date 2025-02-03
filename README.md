@@ -2,6 +2,8 @@
 
 A Hollow Knight mod that tracks all the Lumafly lanterns in the game.
 
+Currently has very many debug logs. Will remove as development continues
+
 ## TODO
 
 - [ ] Check when decoration is destroyed
