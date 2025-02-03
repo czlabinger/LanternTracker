@@ -43,9 +43,9 @@ namespace LumaflyLanternTracker {
 
                         if (LumaflyLanternDB.list[key] == LanternState.DEFAULT) {
                             LumaflyLanternDB.list[key] = LanternState.BROKEN;
-                            LumaflyLanternTrackerMod.broken += 1;
-                            LumaflyLanternTrackerMod.Instance.LogDebug($"Broken {gameObject.name} +1: {LumaflyLanternTrackerMod.broken}");
-                            //TODO: Save in DB
+                            LumaflyLanternTrackerMod.totalBroken += 1;
+                            LumaflyLanternTrackerMod.brokenInRoom += 1;
+                            LumaflyLanternTrackerMod.Instance.LogDebug($"Broken {gameObject.name} +1: {LumaflyLanternTrackerMod.totalBroken}");
                             break;
                         }
                     }
