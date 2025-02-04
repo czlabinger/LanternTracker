@@ -2,6 +2,7 @@ using Modding;
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using MagicUI.Core;
 
 namespace LumaflyLanternTracker {
     public class LumaflyLanternTrackerMod : Mod {
@@ -41,6 +42,7 @@ namespace LumaflyLanternTracker {
 
             ui = new LumaflyLanternUI();
             UnityEngine.SceneManagement.SceneManager.activeSceneChanged += AttachTracker;
+            ModHooks.SavegameSaveHook += AfterSaveLoad;
 
             Log("Initialized LumaflyLanternTracker");
         }
@@ -49,25 +51,41 @@ namespace LumaflyLanternTracker {
             totalInRoom = 0;
             brokenInRoom = 0;
 
+            if (newScene.name.StartsWith("Menu_") ||
+                newScene.name.StartsWith("Intro_") ||
+                newScene.name.StartsWith("Pre_Menu_") ||
+                newScene.name.StartsWith("BetaEnd") ||
+                newScene.name.StartsWith("End_")) {
+
+                    ui.vstack.Visibility = Visibility.Hidden;
+            } else {
+                ui.vstack.Visibility = Visibility.Visible;
+            }
+
             foreach (GameObject gameObject in newScene.GetRootGameObjects()) {
 
                 if (LumaflyLanternDB.list.ContainsKey(LanternKey.FromGameObject(gameObject).Serialize())) {
                     gameObject.AddComponent<LanternCollisionTracker>();
                     totalInRoom++;
-                        
+
                     if (LumaflyLanternDB.list[LanternKey.FromGameObject(gameObject).Serialize()] == LanternState.BROKEN) {
-                        brokenInRoom ++;
+                        brokenInRoom++;
                     }
                     LogDebug($"in room: {totalInRoom}, broken in room: {brokenInRoom}, total broken: {totalBroken}");
                 }
-                
+
             }
-            UpdateUI();
+            UpdateUI("");
         }
 
-        internal void UpdateUI() {
+        private void AfterSaveLoad(int sg) {
+            ui.vstack.Visibility = Visibility.Visible;
+        }
+
+        internal void UpdateUI(string broken) {
             ui.TotalCounter.Text = $"{totalBroken}/{total}";
             ui.RoomCounter.Text = $"{brokenInRoom}/{totalInRoom}";
+            ui.DBBuildHelper.Text = $"You broke {broken}";
         }
     }
 }

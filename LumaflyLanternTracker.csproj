@@ -47,6 +47,8 @@
     </Target>
 
     <ItemGroup>
+      <None Remove="Assets\lantern_room.png" />
+      <None Remove="Assets\lantern_total.png" />
       <None Remove="build.yml" />
       <None Remove="dependabot.yml" />
       <None Remove="README.md" />
@@ -339,5 +341,17 @@
     <ItemGroup>
         <None Include=".gitignore" />
         <None Include="LocalOverrides.targets" />
+    </ItemGroup>
+
+    
+
+    <ItemGroup>
+      <EmbeddedResource Include="Assets\lantern_room.png" />
+    </ItemGroup>
+
+    
+
+    <ItemGroup>
+      <EmbeddedResource Include="Assets\lantern_total.png" />
     </ItemGroup>
 </Project>

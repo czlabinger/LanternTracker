@@ -44,7 +44,7 @@ namespace LumaflyLanternTracker {
                         LumaflyLanternDB.list[LanternKey.FromGameObject(gameObject).Serialize()] = LanternState.BROKEN;
                         LumaflyLanternTrackerMod.totalBroken += 1;
                         LumaflyLanternTrackerMod.brokenInRoom += 1;
-                        LumaflyLanternTrackerMod.Instance.UpdateUI();
+                        LumaflyLanternTrackerMod.Instance.UpdateUI(gameObject.name);
                         LumaflyLanternTrackerMod.Instance.LogDebug($"Broken {gameObject.name} +1: {LumaflyLanternTrackerMod.totalBroken}");
                         
                     }
