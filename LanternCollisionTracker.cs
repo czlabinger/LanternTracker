@@ -4,9 +4,8 @@ using UnityEngine;
 namespace LumaflyLanternTracker {
     internal class LanternCollisionTracker : MonoBehaviour {
 
-        
         private void OnTriggerEnter2D(Collider2D other) {
-            
+
             List<GameObject> list = new List<GameObject>() { 
                 GetChildRecursive(HeroController.instance.gameObject, "Slash"),
                 GetChildRecursive(HeroController.instance.gameObject, "AltSlash"),
@@ -35,7 +34,10 @@ namespace LumaflyLanternTracker {
 
         private void TrackDestroy() {
 
-            if (gameObject.GetComponent<BoxCollider2D>() != null) {
+            LumaflyLanternTrackerMod.Instance.UpdateUI($"scene: {gameObject.scene.name}, name: {gameObject.name}, pos: {gameObject.transform.position.x}/{gameObject.transform.position.y}");
+            LumaflyLanternTrackerMod.Instance.Log($"{{new LanternKey(\"{gameObject.scene.name}\", \"{gameObject.name}\", new Vector2({gameObject.transform.position.x}f, {gameObject.transform.position.y}f)).Serialize(),LanternState.DEFAULT}},");
+
+            if (gameObject.GetComponent<Collider2D>() != null) {
 
                 if (LumaflyLanternDB.list.ContainsKey(LanternKey.FromGameObject(gameObject).Serialize())) {
 
@@ -44,13 +46,12 @@ namespace LumaflyLanternTracker {
                         LumaflyLanternDB.list[LanternKey.FromGameObject(gameObject).Serialize()] = LanternState.BROKEN;
                         LumaflyLanternTrackerMod.totalBroken += 1;
                         LumaflyLanternTrackerMod.brokenInRoom += 1;
-                        LumaflyLanternTrackerMod.Instance.UpdateUI(gameObject.name);
+                        LumaflyLanternTrackerMod.Instance.UpdateUI($"scene: {gameObject.scene.name}, name: {gameObject.name}, pos: {gameObject.transform.position.x}/{gameObject.transform.position.y}");
                         LumaflyLanternTrackerMod.Instance.LogDebug($"Broken {gameObject.name} +1: {LumaflyLanternTrackerMod.totalBroken}");
                         
                     }
                     
                 }
-                
             }
         }
 

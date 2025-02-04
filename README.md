@@ -13,6 +13,7 @@ Currently has very many debug logs. Will remove as development continues
 - [X] Track how many in room were broken before
 - [ ] Check if Crystal Dash destroyes some lanterns
 - [ ] If Above is true track destruction from Crstal Dash
+- [ ] Spells can break lanterns
 - [ ] Better UI
 
 Lowest Prio

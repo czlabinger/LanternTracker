@@ -46,7 +46,7 @@ namespace LumaflyLanternTracker {
 
             TotalCounter = CreateCounter("0/0");
             RoomCounter = CreateCounter("0/0");
-            DBBuildHelper = CreateCounter("");
+            DBBuildHelper = CreateCounter("You broke");
 
 
             float aspectRatio = 1 / 1;

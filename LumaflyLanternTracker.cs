@@ -3,11 +3,12 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using MagicUI.Core;
+using System.Text;
 
 namespace LumaflyLanternTracker {
     public class LumaflyLanternTrackerMod : Mod {
 
-        public override string GetVersion() => "0.2.0";
+        public override string GetVersion() => "0.2.1";
         internal static readonly int total = LumaflyLanternDB.list.Count;
         internal static int totalBroken = 0;
         internal static int totalInRoom = 0;
@@ -64,8 +65,19 @@ namespace LumaflyLanternTracker {
 
             foreach (GameObject gameObject in newScene.GetRootGameObjects()) {
 
+                gameObject.AddComponent<LanternCollisionTracker>();
+                Log($"Adding tracker to: {gameObject.name}");
+
+                StringBuilder sb = new StringBuilder();
+                PrintChildrenRecursive(gameObject.transform, 0, sb);
+                Log(sb.ToString());
+
+                if ( gameObject.name.Equals("_Scenery") || gameObject.name.Equals("station_pole")) {
+                    CheckChildrenRecursive(gameObject.transform);
+                }
+
                 if (LumaflyLanternDB.list.ContainsKey(LanternKey.FromGameObject(gameObject).Serialize())) {
-                    gameObject.AddComponent<LanternCollisionTracker>();
+                    //gameObject.AddComponent<LanternCollisionTracker>();
                     totalInRoom++;
 
                     if (LumaflyLanternDB.list[LanternKey.FromGameObject(gameObject).Serialize()] == LanternState.BROKEN) {
@@ -86,6 +98,26 @@ namespace LumaflyLanternTracker {
             ui.TotalCounter.Text = $"{totalBroken}/{total}";
             ui.RoomCounter.Text = $"{brokenInRoom}/{totalInRoom}";
             ui.DBBuildHelper.Text = $"You broke {broken}";
+        }
+
+        private void CheckChildrenRecursive(Transform parent) {
+            foreach (Transform child in parent) {
+                //if (LumaflyLanternDB.list.ContainsKey(LanternKey.FromGameObject(child.gameObject).Serialize())) {
+                    child.gameObject.AddComponent<LanternCollisionTracker>();
+                    totalInRoom++;
+                    Log($"Adding tracker to: {child.gameObject.name}");
+                //}
+                CheckChildrenRecursive(child);
+            }
+        }
+
+        private void PrintChildrenRecursive(Transform parent, int depth, StringBuilder sb) {
+            string indent = new string(' ', depth * 2);
+            sb.AppendLine($"{indent}{parent.name}");
+
+            foreach (Transform child in parent) {
+                PrintChildrenRecursive(child, depth + 1, sb);
+            }
         }
     }
 }
