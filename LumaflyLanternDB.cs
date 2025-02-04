@@ -8,6 +8,7 @@ namespace LumaflyLanternTracker {
         //Serialized LanternKey, LanternState
         internal static readonly Dictionary<string[], LanternState> list = new Dictionary<string[], LanternState>(new StringArrayComparer())
         {
+            //Check with map
             #region Crossroads
             // Front of stag room
             {new LanternKey("Crossroads_03", "Stag_Pole_Break", new Vector2(7.152f, 9.695121f)).Serialize(),LanternState.DEFAULT},
@@ -179,7 +180,7 @@ namespace LumaflyLanternTracker {
             {new LanternKey("Ruins1_30", "ruind_dressing_light_03", new Vector2(47.45881f, 59.6f)).Serialize(),LanternState.DEFAULT},
             {new LanternKey("Ruins1_30", "ruind_dressing_light_03 (5)", new Vector2(58.75f, 56.2f)).Serialize(),LanternState.DEFAULT},
             
-            //Ruins_32
+            //Ruins1_32
             {new LanternKey("Ruins1_32", "ruin_detail_lamp2 (7)", new Vector2(42.25f, 54.41f)).Serialize(),LanternState.DEFAULT},
             {new LanternKey("Ruins1_32", "ruin_detail_lamp2 (6)", new Vector2(28.36f, 38.92f)).Serialize(),LanternState.DEFAULT},
             {new LanternKey("Ruins1_32", "ruin_detail_lamp2 (5)", new Vector2(38.39f, 81.98f)).Serialize(),LanternState.DEFAULT},
@@ -188,7 +189,7 @@ namespace LumaflyLanternTracker {
             {new LanternKey("Ruins1_32", "ruin_detail_lamp2", new Vector2(11.31f, 70.12f)).Serialize(),LanternState.DEFAULT},
             {new LanternKey("Ruins1_32", "ruin_detail_lamp2 (1)", new Vector2(21.4f, 70.12f)).Serialize(),LanternState.DEFAULT},
 
-            //Ruins_18
+            //Ruins1_18
             {new LanternKey("Ruins1_18", "ruind_dressing_light_02 (4)", new Vector2(77.49f, 24.42f)).Serialize(),LanternState.DEFAULT},
             {new LanternKey("Ruins1_18", "ruind_dressing_light_02 (3)", new Vector2(64.32f, 24.42f)).Serialize(),LanternState.DEFAULT},
             {new LanternKey("Ruins1_18", "ruind_dressing_light_02 (2)", new Vector2(51.19f, 24.42f)).Serialize(),LanternState.DEFAULT},
@@ -196,8 +197,113 @@ namespace LumaflyLanternTracker {
             {new LanternKey("Ruins1_18", "ruind_dressing_light_02", new Vector2(24.72f, 24.42f)).Serialize(),LanternState.DEFAULT},
             {new LanternKey("Ruins1_18", "ruind_dressing_light_02 (5)", new Vector2(11.29f, 24.26f)).Serialize(),LanternState.DEFAULT},
 
+            //Ruins2_04
+            {new LanternKey("Ruins2_04", "Stag_Pole_Break", new Vector2(140.0139f, 7.65847f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Ruins2_04", "Stag_Pole_Break (1)", new Vector2(135.19f, 51.65f)).Serialize(),LanternState.DEFAULT},
+
+            //Ruins_House_02
+            {new LanternKey("Ruins_House_02", "ruind_dressing_light_03", new Vector2(20.45f, 16.35f)).Serialize(),LanternState.DEFAULT},
+
+            //Ruins_House_01
+            {new LanternKey("Ruins_House_01", "ruind_dressing_light_03", new Vector2(20.45f, 16.35f)).Serialize(),LanternState.DEFAULT},
+
+            //Abyss_01
+            {new LanternKey("Abyss_01", "Stag_Pole_Tall_Break (2)", new Vector2(25.09f, 162.28f)).Serialize(),LanternState.DEFAULT},
+
+            //Ruins2_06
+            //{new LanternKey("Ruins2_06", "Stag_Pole_Break", new Vector2(48.90189f, 6.639233f)).Serialize(),LanternState.DEFAULT}, // No Lumaflies
+            {new LanternKey("Ruins2_06", "Stag_Pole_Break (1)", new Vector2(39.17262f, 32.64556f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Ruins2_07", "ruind_dressing_light_03 (1)", new Vector2(15.67f, 10.87f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Ruins2_07", "ruind_dressing_light_03 (3)", new Vector2(24.13f, 11f)).Serialize(),LanternState.DEFAULT},
+            //{new LanternKey("Ruins2_07", "Stag_Pole_Tall_Break (2)", new Vector2(32.62f, 8.42f)).Serialize(),LanternState.DEFAULT},// No Lumaflies
+
+
+            //Ruins2_08
+            {new LanternKey("Ruins2_08", "ruind_dressing_light_03 (1)", new Vector2(13.04f, 10.87f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Ruins2_08", "ruind_dressing_light_03 (3)", new Vector2(24.13f, 11.49f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Ruins2_08", "Stag_Pole_Tall_Break", new Vector2(33.09f, 8.79f)).Serialize(),LanternState.DEFAULT},
+
+            //Ruins2_09
+            {new LanternKey("Ruins2_09", "ruind_dressing_light_03 (2)", new Vector2(33.69f, 16.45f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Ruins2_09", "ruind_dressing_light_03 (1)", new Vector2(50.88f, 14.7f)).Serialize(),LanternState.DEFAULT},
+
+            //Ruins_Elevator
+            {new LanternKey("Ruins_Elevator", "ruind_dressing_light_03", new Vector2(19.4f, 10.62f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Ruins_Elevator", "ruind_dressing_light_03 (1)", new Vector2(24.51f, 33.68f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Ruins_Elevator", "ruind_dressing_light_03 (2)", new Vector2(36.63f, 56.46f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Ruins_Elevator", "ruind_dressing_light_03 (4)", new Vector2(23.92f, 100.66f)).Serialize(),LanternState.DEFAULT},
+            //{new LanternKey("Ruins_Elevator", "ruind_dressing_light_03 (5)", new Vector2(36.53f, 100.66f)).Serialize(),LanternState.DEFAULT}, //No Lumaflies
+            {new LanternKey("Ruins_Elevator", "ruind_dressing_light_03 (6)", new Vector2(23.92f, 122.39f)).Serialize(),LanternState.DEFAULT},
 
             #endregion
+
+            #region Crystal Peak
+
+            //Mines_01
+            {new LanternKey("Mines_01", "mine_globe_04", new Vector2(4.92f, 7f)).Serialize(),LanternState.DEFAULT},
+
+            //Mines_02
+            {new LanternKey("Mines_02", "mine_globe_01 (6)", new Vector2(35.1f, 9.65f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_02", "mine_globe_01 (5)", new Vector2(52.09f, 12.04f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_02", "mine_globe_01 (2)", new Vector2(122.34f, 18.94f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_02", "mine_globe_01", new Vector2(135.54f, 9.15f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_02", "mine_globe_01 (1)", new Vector2(142.67f, 8.97f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_02", "mine_globe_01 (4)", new Vector2(141.72f, 25.95f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_02", "mine_globe_01 (3)", new Vector2(125.9f, 33.04f)).Serialize(),LanternState.DEFAULT},
+
+            //Mines_04
+            {new LanternKey("Mines_04", "mine_globe_01", new Vector2(13.11f, 58.09f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_04", "mine_globe_01 (1)", new Vector2(17.17f, 72.03f)).Serialize(),LanternState.DEFAULT},
+
+            //Mines_37
+            {new LanternKey("Mines_37", "mine_globe_01 (10)", new Vector2(35.4f, 8.136544f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_37", "mine_globe_01 (9)", new Vector2(39.05523f, 8.136544f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_37", "mine_globe_01", new Vector2(24.47399f, 42.01061f)).Serialize(),LanternState.DEFAULT},
+
+            //Mines_20
+            {new LanternKey("Mines_20", "mine_globe_01", new Vector2(34.73f, 68.87f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_20", "mine_globe_01 (1)", new Vector2(20.41f, 67.12f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_20", "mine_globe_01 (2)", new Vector2(8.11f, 67.12f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_20", "mine_globe_01 (3)", new Vector2(27.79f, 80.08f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_20", "mine_globe_01 (4)", new Vector2(23.82f, 80.08f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_20", "mine_globe_01 (6)", new Vector2(21.33f, 156.75f)).Serialize(),LanternState.DEFAULT},
+
+            //Mines_11
+            {new LanternKey("Mines_11", "mine_globe_01 (3)", new Vector2(12.22f, 62.17f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_11", "mine_globe_01 (2)", new Vector2(14.98f, 44.13f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_11", "mine_globe_01 (7)", new Vector2(10.61f, 37.99f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_11", "mine_globe_01 (6)", new Vector2(16.6f, 33.24f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_11", "mine_globe_01 (8)", new Vector2(8.48f, 29.25f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_11", "mine_globe_01 (5)", new Vector2(17.38f, 28.37f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_11", "mine_globe_01 (9)", new Vector2(11.37f, 17.47f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_11", "mine_globe_01", new Vector2(29.74f, 8.38f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_11", "mine_globe_01 (1)", new Vector2(22.08f, 8.34f)).Serialize(),LanternState.DEFAULT},
+
+            //Mines_32
+            {new LanternKey("Mines_32", "mine_globe_01", new Vector2(55.2f, 8.98f)).Serialize(),LanternState.DEFAULT},
+
+            //Mines_31
+            {new LanternKey("Mines_31", "mine_globe_01 (2)", new Vector2(225.34f, 33.24f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_31", "mine_globe_01 (1)", new Vector2(217.75f, 33.29f)).Serialize(),LanternState.DEFAULT},
+            {new LanternKey("Mines_31", "mine_globe_01", new Vector2(209.4656f, 32.69827f)).Serialize(),LanternState.DEFAULT},
+
+            #endregion
+
+            #region Anchient Basin
+
+            //Abyss_22
+            {new LanternKey("Abyss_22", "Stag_Pole_Tall_Break", new Vector2(33.09f, 8.79f)).Serialize(),LanternState.DEFAULT},
+
+            #endregion
+
+            #region Abyss
+
+            // 0
+
+            #endregion
+
+
+            //White Palace/PoP
         };
     }
 }
