@@ -15,6 +15,8 @@ Currently has very many debug logs. Will remove as development continues
 - [ ] If Above is true track destruction from Crstal Dash
 - [ ] Spells can break lanterns
 - [ ] Better UI
+- [ ] Check why tram doesn't work
+- [ ] Make list persistent per save file
 
 Lowest Prio
 - [ ] Add randomizer support
