@@ -1,5 +1,5 @@
 ﻿namespace LumaflyLanternTracker {
-    internal enum LanternState {
+    internal enum LumaflyLanternState {
         DEFAULT = 0,
         BROKEN = 1,
     }

@@ -65,22 +65,22 @@ namespace LumaflyLanternTracker {
 
             foreach (GameObject gameObject in newScene.GetRootGameObjects()) {
 
-                gameObject.AddComponent<LanternCollisionTracker>();
+                gameObject.AddComponent<LumaflyLanternCollisionTracker>();
                 Log($"Adding tracker to: {gameObject.name}");
 
                 StringBuilder sb = new StringBuilder();
                 PrintChildrenRecursive(gameObject.transform, 0, sb);
                 Log(sb.ToString());
 
-                if ( gameObject.name.Equals("_Scenery") || gameObject.name.Equals("station_pole")) {
+                if ( gameObject.name.Equals("_Scenery") || gameObject.name.Equals("station_pole") || gameObject.name.Equals("tram_lamps")) {
                     CheckChildrenRecursive(gameObject.transform);
                 }
 
-                if (LumaflyLanternDB.list.ContainsKey(LanternKey.FromGameObject(gameObject).Serialize())) {
+                if (LumaflyLanternDB.list.ContainsKey(LumaflyLanternKey.FromGameObject(gameObject).Serialize())) {
                     //gameObject.AddComponent<LanternCollisionTracker>();
                     totalInRoom++;
 
-                    if (LumaflyLanternDB.list[LanternKey.FromGameObject(gameObject).Serialize()] == LanternState.BROKEN) {
+                    if (LumaflyLanternDB.list[LumaflyLanternKey.FromGameObject(gameObject).Serialize()] == LumaflyLanternState.BROKEN) {
                         brokenInRoom++;
                     }
                     LogDebug($"in room: {totalInRoom}, broken in room: {brokenInRoom}, total broken: {totalBroken}");
@@ -103,7 +103,7 @@ namespace LumaflyLanternTracker {
         private void CheckChildrenRecursive(Transform parent) {
             foreach (Transform child in parent) {
                 //if (LumaflyLanternDB.list.ContainsKey(LanternKey.FromGameObject(child.gameObject).Serialize())) {
-                    child.gameObject.AddComponent<LanternCollisionTracker>();
+                    child.gameObject.AddComponent<LumaflyLanternCollisionTracker>();
                     totalInRoom++;
                     Log($"Adding tracker to: {child.gameObject.name}");
                 //}
