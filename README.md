@@ -1,6 +1,6 @@
-﻿# LumaflyLanternTracker
+﻿# LanternTracker
 
-A Hollow Knight mod that tracks all the Lumafly lanterns in the game.
+A Hollow Knight mod that tracks all the beakable Lanterns in the game.
 
 Currently has very many debug logs. Will remove as development continues
 

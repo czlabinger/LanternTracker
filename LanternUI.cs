@@ -5,8 +5,8 @@ using System.IO;
 using System.Reflection;
 using UnityEngine;
 
-namespace LumaflyLanternTracker {
-    internal class LumaflyLanternUI : IDisposable {
+namespace LanternTracker {
+    internal class LanternUI : IDisposable {
         internal LayoutRoot layout;
         internal StackLayout vstack;
         internal TextObject TotalCounter { get; }
@@ -19,7 +19,7 @@ namespace LumaflyLanternTracker {
         private float targetHeight = Screen.height * 0.05f;
 
         //TODO: Fix image scaling
-        internal LumaflyLanternUI() {
+        internal LanternUI() {
             layout = new LayoutRoot(true, "LumaflyLanternUI");
 
             vstack = new StackLayout(layout)

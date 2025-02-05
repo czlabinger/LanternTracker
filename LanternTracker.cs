@@ -3,49 +3,48 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using MagicUI.Core;
-using System.Text;
 
-namespace LumaflyLanternTracker {
-    public class LumaflyLanternTrackerMod : Mod {
+namespace LanternTracker {
+    public class LanternTrackerMod : Mod {
 
-        public override string GetVersion() => "0.2.1";
-        internal static readonly int total = LumaflyLanternDB.list.Count;
+        public override string GetVersion() => "0.3.0";
+        internal static readonly int total = LanternDB.list.Count;
         internal static int totalBroken = 0;
         internal static int totalInRoom = 0;
         internal static int brokenInRoom = 0;
 
-        private LumaflyLanternUI ui;
+        private LanternUI ui;
 
         #region Genral
 
-        private static LumaflyLanternTrackerMod? _instance;
-        new public string GetName() => "Lumafly tracker";
+        private static LanternTrackerMod? _instance;
+        new public string GetName() => "Lantern Tracker";
 
 
-        internal static LumaflyLanternTrackerMod Instance {
+        internal static LanternTrackerMod Instance {
             get {
                 if (_instance == null) {
-                    throw new InvalidOperationException($"An instance of {nameof(LumaflyLanternTrackerMod)} was never constructed");
+                    throw new InvalidOperationException($"An instance of {nameof(LanternTrackerMod)} was never constructed");
                 }
                 return _instance;
             }
         }
 
-        public LumaflyLanternTrackerMod() : base("LumaflyLanternTracker") {
+        public LanternTrackerMod() : base("LanternTracker") {
             _instance = this;
         }
 
         #endregion
 
         public override void Initialize() {
-            Log("Initializing LumaflyLanternTracker");
+            Log("Initializing LanternTracker");
             base.Initialize();
 
-            ui = new LumaflyLanternUI();
+            ui = new LanternUI();
             UnityEngine.SceneManagement.SceneManager.activeSceneChanged += AttachTracker;
             ModHooks.SavegameSaveHook += AfterSaveLoad;
 
-            Log("Initialized LumaflyLanternTracker");
+            Log("Initialized LanternTracker");
         }
 
         private void AttachTracker(Scene oldScene, Scene newScene) {
@@ -65,22 +64,15 @@ namespace LumaflyLanternTracker {
 
             foreach (GameObject gameObject in newScene.GetRootGameObjects()) {
 
-                gameObject.AddComponent<LumaflyLanternCollisionTracker>();
-                Log($"Adding tracker to: {gameObject.name}");
-
-                StringBuilder sb = new StringBuilder();
-                PrintChildrenRecursive(gameObject.transform, 0, sb);
-                Log(sb.ToString());
-
                 if ( gameObject.name.Equals("_Scenery") || gameObject.name.Equals("station_pole") || gameObject.name.Equals("tram_lamps")) {
                     CheckChildrenRecursive(gameObject.transform);
                 }
 
-                if (LumaflyLanternDB.list.ContainsKey(LumaflyLanternKey.FromGameObject(gameObject).Serialize())) {
-                    //gameObject.AddComponent<LanternCollisionTracker>();
+                if (LanternDB.list.ContainsKey(LanternKey.FromGameObject(gameObject).Serialize())) {
+                    gameObject.AddComponent<LanternCollisionTracker>();
                     totalInRoom++;
 
-                    if (LumaflyLanternDB.list[LumaflyLanternKey.FromGameObject(gameObject).Serialize()] == LumaflyLanternState.BROKEN) {
+                    if (LanternDB.list[LanternKey.FromGameObject(gameObject).Serialize()] == LanternState.BROKEN) {
                         brokenInRoom++;
                     }
                     LogDebug($"in room: {totalInRoom}, broken in room: {brokenInRoom}, total broken: {totalBroken}");
@@ -102,21 +94,12 @@ namespace LumaflyLanternTracker {
 
         private void CheckChildrenRecursive(Transform parent) {
             foreach (Transform child in parent) {
-                //if (LumaflyLanternDB.list.ContainsKey(LanternKey.FromGameObject(child.gameObject).Serialize())) {
-                    child.gameObject.AddComponent<LumaflyLanternCollisionTracker>();
+                if (LanternDB.list.ContainsKey(LanternKey.FromGameObject(child.gameObject).Serialize())) {
+                    child.gameObject.AddComponent<LanternCollisionTracker>();
                     totalInRoom++;
-                    Log($"Adding tracker to: {child.gameObject.name}");
-                //}
+                    LogDebug($"Adding tracker to: {child.gameObject.name}");
+                }
                 CheckChildrenRecursive(child);
-            }
-        }
-
-        private void PrintChildrenRecursive(Transform parent, int depth, StringBuilder sb) {
-            string indent = new string(' ', depth * 2);
-            sb.AppendLine($"{indent}{parent.name}");
-
-            foreach (Transform child in parent) {
-                PrintChildrenRecursive(child, depth + 1, sb);
             }
         }
     }

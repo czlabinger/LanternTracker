@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace LumaflyLanternTracker {
-    internal class LumaflyLanternCollisionTracker : MonoBehaviour {
+namespace LanternTracker {
+    internal class LanternCollisionTracker : MonoBehaviour {
 
         private void OnTriggerEnter2D(Collider2D other) {
 
@@ -33,21 +33,17 @@ namespace LumaflyLanternTracker {
         }
 
         private void TrackDestroy() {
-
-            LumaflyLanternTrackerMod.Instance.UpdateUI($"scene: {gameObject.scene.name}, name: {gameObject.name}, pos: {gameObject.transform.position.x}/{gameObject.transform.position.y}");
-            LumaflyLanternTrackerMod.Instance.Log($"{{new LumaflyLanternKey(\"{gameObject.scene.name}\", \"{gameObject.name}\", new Vector2({gameObject.transform.position.x}f, {gameObject.transform.position.y}f)).Serialize(), LumaflyLanternState.DEFAULT}},");
-
             if (gameObject.GetComponent<Collider2D>() != null) {
 
-                if (LumaflyLanternDB.list.ContainsKey(LumaflyLanternKey.FromGameObject(gameObject).Serialize())) {
+                if (LanternDB.list.ContainsKey(LanternKey.FromGameObject(gameObject).Serialize())) {
 
-                    if (LumaflyLanternDB.list[LumaflyLanternKey.FromGameObject(gameObject).Serialize()] == LumaflyLanternState.DEFAULT) {
+                    if (LanternDB.list[LanternKey.FromGameObject(gameObject).Serialize()] == LanternState.DEFAULT) {
 
-                        LumaflyLanternDB.list[LumaflyLanternKey.FromGameObject(gameObject).Serialize()] = LumaflyLanternState.BROKEN;
-                        LumaflyLanternTrackerMod.totalBroken += 1;
-                        LumaflyLanternTrackerMod.brokenInRoom += 1;
-                        LumaflyLanternTrackerMod.Instance.UpdateUI($"scene: {gameObject.scene.name}, name: {gameObject.name}, pos: {gameObject.transform.position.x}/{gameObject.transform.position.y}");
-                        LumaflyLanternTrackerMod.Instance.LogDebug($"Broken {gameObject.name} +1: {LumaflyLanternTrackerMod.totalBroken}");
+                        LanternDB.list[LanternKey.FromGameObject(gameObject).Serialize()] = LanternState.BROKEN;
+                        LanternTrackerMod.totalBroken += 1;
+                        LanternTrackerMod.brokenInRoom += 1;
+                        LanternTrackerMod.Instance.UpdateUI($"scene: {gameObject.scene.name}, name: {gameObject.name}, pos: {gameObject.transform.position.x}/{gameObject.transform.position.y}");
+                        LanternTrackerMod.Instance.LogDebug($"Broken {gameObject.name} +1: {LanternTrackerMod.totalBroken}");
                         
                     }
                     
