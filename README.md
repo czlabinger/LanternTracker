@@ -1,6 +1,6 @@
-﻿# LumaflyLanternTracker
+﻿# LanternTracker
 
-A Hollow Knight mod that tracks all the Lumafly lanterns in the game.
+A Hollow Knight mod that tracks all the beakable Lanterns in the game.
 
 Currently has very many debug logs. Will remove as development continues
 
@@ -11,8 +11,9 @@ Currently has very many debug logs. Will remove as development continues
 - [X] Add UI for Total/Room amount (First Version done)
 - [X] Track how many are in room (SceneLoaded [Unity's Version] check how many GOs are in DB)
 - [X] Track how many in room were broken before
-- [ ] Check if Crystal Dash destroyes some lanterns
+- [X] Check if Crystal Dash destroyes some lanterns (They break)
 - [ ] If Above is true track destruction from Crstal Dash
+- [ ] Spells can break lanterns
 - [ ] Better UI
 
 Lowest Prio

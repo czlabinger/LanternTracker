@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace LumaflyLanternTracker {
+namespace LanternTracker {
     internal class StringArrayComparer : IEqualityComparer<string[]> {
         public bool Equals(string[] x, string[] y) {
             if (ReferenceEquals(x, y)) return true;

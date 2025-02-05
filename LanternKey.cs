@@ -2,7 +2,7 @@
 using System.Text;
 using UnityEngine;
 
-namespace LumaflyLanternTracker {
+namespace LanternTracker {
 
     readonly struct LanternKey {
 
