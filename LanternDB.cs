@@ -5,7 +5,7 @@ namespace LanternTracker {
     internal class LanternDB {
 
         //Serialized LanternKey, LanternState
-        internal static readonly Dictionary<string[], LanternState> list = new Dictionary<string[], LanternState>(new StringArrayComparer())
+        internal static Dictionary<string[], LanternState> list { get; set; } = new Dictionary<string[], LanternState>(new StringArrayComparer())
         {
             #region Forgotten Crossroads
             
@@ -226,7 +226,7 @@ namespace LanternTracker {
             {new LanternKey("Abyss_01", "Stag_Pole_Tall_Break (2)", new Vector2(25.09f, 162.28f)).Serialize(),LanternState.DEFAULT},
 
             //Ruins2_06
-            {new LanternKey("Ruins2_06", "Stag_Pole_Break", new Vector2(48.90189f, 6.639233f)).Serialize(),LanternState.DEFAULT}, 
+            {new LanternKey("Ruins2_06", "Stag_Pole_Break", new Vector2(48.90189f, 6.639233f)).Serialize(),LanternState.DEFAULT},
             {new LanternKey("Ruins2_06", "Stag_Pole_Break (1)", new Vector2(39.17262f, 32.64556f)).Serialize(),LanternState.DEFAULT},
             {new LanternKey("Ruins2_07", "ruind_dressing_light_03 (1)", new Vector2(15.67f, 10.87f)).Serialize(),LanternState.DEFAULT},
             {new LanternKey("Ruins2_07", "ruind_dressing_light_03 (3)", new Vector2(24.13f, 11f)).Serialize(),LanternState.DEFAULT},

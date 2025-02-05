@@ -3,9 +3,10 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using MagicUI.Core;
+using System.Collections.Generic;
 
 namespace LanternTracker {
-    public class LanternTrackerMod : Mod {
+    public class LanternTrackerMod : Mod, ILocalSettings<Dictionary<string[], LanternState> {
 
         public override string GetVersion() => "0.3.0";
         internal static readonly int total = LanternDB.list.Count;
@@ -101,6 +102,14 @@ namespace LanternTracker {
                 }
                 CheckChildrenRecursive(child);
             }
+        }
+
+        void ILocalSettings<Dictionary<string[], LanternState>>.OnLoadLocal(Dictionary<string[], LanternState> s) {
+            LanternDB.list = s;
+        }
+
+        Dictionary<string[], LanternState> ILocalSettings<Dictionary<string[], LanternState>>.OnSaveLocal() {
+            return LanternDB.list;
         }
     }
 }

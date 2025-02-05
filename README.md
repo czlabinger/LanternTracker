@@ -7,7 +7,7 @@ Currently has very many debug logs. Will remove as development continues
 ## TODO
 
 - [X] Check when decoration is destroyed
-- [ ] Build the LanternDB
+- [X] Build the LanternDB
 - [X] Add UI for Total/Room amount (First Version done)
 - [X] Track how many are in room (SceneLoaded [Unity's Version] check how many GOs are in DB)
 - [X] Track how many in room were broken before
@@ -16,7 +16,7 @@ Currently has very many debug logs. Will remove as development continues
 - [ ] Spells can break lanterns
 - [ ] Better UI
 - [ ] Check why tram doesn't work
-- [ ] Make list persistent per save file
+- [X] Make list persistent per save file
 
 Lowest Prio
 - [ ] Add randomizer support
