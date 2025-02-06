@@ -35,18 +35,28 @@ namespace LanternTracker {
         private void TrackDestroy() {
             if (gameObject.GetComponent<Collider2D>() != null) {
 
-                if (LanternDB.list.ContainsKey(LanternKey.FromGameObject(gameObject).Serialize())) {
+                if (LanternTrackerMod.db.list.ContainsKey(LanternKey.FromGameObject(gameObject).Serialize())) {
 
-                    if (LanternDB.list[LanternKey.FromGameObject(gameObject).Serialize()] == LanternState.DEFAULT) {
+                    if (LanternTrackerMod.db.list[LanternKey.FromGameObject(gameObject).Serialize()] == LanternState.DEFAULT) {
 
-                        LanternDB.list[LanternKey.FromGameObject(gameObject).Serialize()] = LanternState.BROKEN;
+                        LanternTrackerMod.db.list[LanternKey.FromGameObject(gameObject).Serialize()] = LanternState.BROKEN;
                         LanternTrackerMod.totalBroken += 1;
                         LanternTrackerMod.brokenInRoom += 1;
                         LanternTrackerMod.Instance.UpdateUI($"scene: {gameObject.scene.name}, name: {gameObject.name}, pos: {gameObject.transform.position.x}/{gameObject.transform.position.y}");
                         LanternTrackerMod.Instance.LogDebug($"Broken {gameObject.name} +1: {LanternTrackerMod.totalBroken}");
-                        
                     }
                     
+                } else if (gameObject.scene.name.Equals("Room_Tram") && gameObject.name.StartsWith("tram_lamp_single")) {
+                    
+                    LanternTrackerMod.db.list[new LanternKey(
+                                                gameObject.scene.name, gameObject.name, 
+                                                new Vector2(gameObject.transform.position.x, 
+                                                gameObject.transform.position.y)).Serialize()] = LanternState.BROKEN;
+
+                    LanternTrackerMod.totalBroken += 1;
+                    LanternTrackerMod.brokenInRoom += 1;
+                    LanternTrackerMod.Instance.UpdateUI($"scene: {gameObject.scene.name}, name: {gameObject.name}, pos: {gameObject.transform.position.x}/{gameObject.transform.position.y}");
+                    LanternTrackerMod.Instance.LogDebug($"Broken {gameObject.name} +1: {LanternTrackerMod.totalBroken}");
                 }
             }
         }

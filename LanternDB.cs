@@ -5,7 +5,7 @@ namespace LanternTracker {
     internal class LanternDB {
 
         //Serialized LanternKey, LanternState
-        internal static readonly Dictionary<string[], LanternState> list = new Dictionary<string[], LanternState>(new StringArrayComparer())
+        internal Dictionary<string[], LanternState> list = new Dictionary<string[], LanternState>(new StringArrayComparer())
         {
             #region Forgotten Crossroads
             

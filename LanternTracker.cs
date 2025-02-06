@@ -3,12 +3,14 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using MagicUI.Core;
+using System.Collections.Generic;
 
 namespace LanternTracker {
-    public class LanternTrackerMod : Mod {
+    public class LanternTrackerMod : Mod, ILocalSettings<LanternDB> {
 
         public override string GetVersion() => "0.3.0";
-        internal static readonly int total = LanternDB.list.Count;
+        internal static LanternDB db = new LanternDB();
+        internal static readonly int total = db.list.Count;
         internal static int totalBroken = 0;
         internal static int totalInRoom = 0;
         internal static int brokenInRoom = 0;
@@ -64,15 +66,18 @@ namespace LanternTracker {
 
             foreach (GameObject gameObject in newScene.GetRootGameObjects()) {
 
-                if ( gameObject.name.Equals("_Scenery") || gameObject.name.Equals("station_pole") || gameObject.name.Equals("tram_lamps")) {
+                if ( gameObject.name.Equals("_Scenery") || gameObject.name.Equals("station_pole") || 
+                    gameObject.name.Equals("tram_lamps") && newScene.name.Equals("Room_Tram")) {
+                    
+                    Log($"{newScene.name}, checking rec: {gameObject.name}");
                     CheckChildrenRecursive(gameObject.transform);
                 }
 
-                if (LanternDB.list.ContainsKey(LanternKey.FromGameObject(gameObject).Serialize())) {
+                if (db.list.ContainsKey(LanternKey.FromGameObject(gameObject).Serialize())) {
                     gameObject.AddComponent<LanternCollisionTracker>();
                     totalInRoom++;
 
-                    if (LanternDB.list[LanternKey.FromGameObject(gameObject).Serialize()] == LanternState.BROKEN) {
+                    if (db.list[LanternKey.FromGameObject(gameObject).Serialize()] == LanternState.BROKEN) {
                         brokenInRoom++;
                     }
                     LogDebug($"in room: {totalInRoom}, broken in room: {brokenInRoom}, total broken: {totalBroken}");
@@ -94,13 +99,28 @@ namespace LanternTracker {
 
         private void CheckChildrenRecursive(Transform parent) {
             foreach (Transform child in parent) {
-                if (LanternDB.list.ContainsKey(LanternKey.FromGameObject(child.gameObject).Serialize())) {
+                if (db.list.ContainsKey(LanternKey.FromGameObject(child.gameObject).Serialize())) {
+                    child.gameObject.AddComponent<LanternCollisionTracker>();
+                    totalInRoom++;
+                    LogDebug($"Adding tracker to: {child.gameObject.name}");
+                } else if (child.gameObject.scene.name.Equals("Room_Tram") && child.gameObject.name.StartsWith("tram_lamp_single")) {
+                    
                     child.gameObject.AddComponent<LanternCollisionTracker>();
                     totalInRoom++;
                     LogDebug($"Adding tracker to: {child.gameObject.name}");
                 }
+
                 CheckChildrenRecursive(child);
             }
+        }
+
+
+        void ILocalSettings<LanternDB>.OnLoadLocal(LanternDB s) {
+            db = s;
+        }
+
+        LanternDB ILocalSettings<LanternDB>.OnSaveLocal() {
+            return db;
         }
     }
 }
